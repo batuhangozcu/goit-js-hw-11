@@ -9,6 +9,23 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 import iziToast from "izitoast";
 // Stil importu
 import "izitoast/dist/css/iziToast.min.css";
+import { Input } from "postcss";
+
+const input = document.getElementById("input")
+const button = document.getElementById("submitButton")
+
+const params = new URLSearchParams({
+  key: "48294638-370103394c700755fbc6c4620",
+  image_type: "photo",
+  orientation: "horizontal",
+  safesearch: "true",
+});
+
+button.addEventListener("click", () => {
+    params.set("q", input.value)
+    fetch(`https://pixabay.com/api/?${params}`).then((r) => console.log(r));
+})
+
 
 
 // const images = [
