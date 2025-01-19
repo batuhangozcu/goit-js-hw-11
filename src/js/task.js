@@ -13,23 +13,27 @@ import "izitoast/dist/css/iziToast.min.css";
 const input = document.getElementById("input");
 const button = document.getElementById("submitButton");
 const lists = document.querySelector(".lists");
-const cards = document.querySelector(".cards");
+// const loader = document.querySelector(".loader");
+
 
 const params = new URLSearchParams({
   key: "48294638-370103394c700755fbc6c4620",
   image_type: "photo",
   orientation: "horizontal",
   safesearch: "true",
-  per_page: "9",
+  per_page: "60",
 });
 
+
+
 button.addEventListener("click", (e) => {
+  lists.innerHTML = `<span class="loader"></span>`
   e.preventDefault;
-  lists.innerHTML = "";
   params.set("q", input.value);
   fetch(`https://pixabay.com/api/?${params}`)
     .then((r) => r.json())
     .then((a) => {
+      lists.innerHTML = "";
       if (a.total == 0) {
         iziToast.error({
           position: "topRight",
