@@ -13,8 +13,6 @@ import "izitoast/dist/css/iziToast.min.css";
 const input = document.getElementById("input");
 const button = document.getElementById("submitButton");
 const lists = document.querySelector(".lists");
-// const loader = document.querySelector(".loader");
-
 
 const params = new URLSearchParams({
   key: "48294638-370103394c700755fbc6c4620",
@@ -24,16 +22,13 @@ const params = new URLSearchParams({
   per_page: "60",
 });
 
-
-
 button.addEventListener("click", (e) => {
-  lists.innerHTML = `<span class="loader"></span>`
+  lists.innerHTML = `<span class="loader"></span>`;
   e.preventDefault;
   params.set("q", input.value);
   fetch(`https://pixabay.com/api/?${params}`)
     .then((r) => r.json())
     .then((a) => {
-      lists.innerHTML = "";
       if (a.total == 0) {
         iziToast.error({
           position: "topRight",
@@ -63,6 +58,7 @@ button.addEventListener("click", (e) => {
        </li>`;
         })
         .join("");
+      lists.innerHTML = "";
       lists.insertAdjacentHTML("afterbegin", markup);
       lists.addEventListener("click", (e) => {
         e.preventDefault();
@@ -73,7 +69,7 @@ button.addEventListener("click", (e) => {
       new SimpleLightbox(".cards a", {
         captionsData: "alt",
         captionDelay: 250,
-      });
+      }).refresh();
     })
     .catch((error) => console.log(error));
 });
