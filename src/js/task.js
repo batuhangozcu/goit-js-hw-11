@@ -20,6 +20,7 @@ const params = new URLSearchParams({
   image_type: "photo",
   orientation: "horizontal",
   safesearch: "true",
+  per_page: "9",
 });
 
 button.addEventListener("click", () => {
@@ -37,22 +38,28 @@ button.addEventListener("click", () => {
       const markup = a.hits
         .map((photo) => {
           return `<li class="list">
+       <div class="cards">
        <a class="link" href= "${photo.tags}">
        <img
         class="image"
-        src="${photo.previewURL}"
+        src="${photo.webformatURL}"
         data-source="${photo.largeImageURL}"
         alt="${photo.tags}"
       />
        </a>
+       <div class="info">
+       <p>Likes <span>${photo.likes}</span></p>
+       <p>Views <span>${photo.views}</span></p>
+       <p>Comments <span>${photo.comments}</span></p>
+       <p>Downloads <span>${photo.downloads}</span></p>
+       </div>
+       </div>
        </li>`;
         })
         .join("");
       lists.insertAdjacentHTML("afterbegin", markup);
     });
 });
-
-
 
 // "id": 4611189,
 //             "pageURL": "https://pixabay.com/photos/kitten-cat-pet-feline-animal-fur-4611189/",
