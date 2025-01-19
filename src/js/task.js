@@ -13,6 +13,7 @@ import "izitoast/dist/css/iziToast.min.css";
 const input = document.getElementById("input");
 const button = document.getElementById("submitButton");
 const lists = document.querySelector(".lists");
+const cards = document.querySelector(".cards");
 
 const params = new URLSearchParams({
   key: "48294638-370103394c700755fbc6c4620",
@@ -59,6 +60,23 @@ button.addEventListener("click", (e) => {
         })
         .join("");
       lists.insertAdjacentHTML("afterbegin", markup);
+      lists.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (e.target.tagName !== "IMG") {
+          return;
+        }
+      });
+      new SimpleLightbox(".cards a", {
+        captionsData: "alt",
+        captionDelay: 250,
+      });
     })
     .catch((error) => console.log(error));
+});
+
+lists.addEventListener("click", (e) => {
+  e.preventDefault();
+  if (e.target.tagName !== "IMG") {
+    return;
+  }
 });
